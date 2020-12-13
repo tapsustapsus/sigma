@@ -1,0 +1,51 @@
+<html>
+
+<head><title>Générateur de QCM SigmaScool</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+<script language="JavaScript">
+<!--
+function exit() {
+  parent.opener.location.href="index.html";
+}
+
+// initialise les variables à 1
+var numQuestions = 1;
+var numChoices = 1;
+var quizType = "";
+
+// ouvre une nouvelle fenêtre
+function openWindow(url, name, rs, w, h) {
+  var resize = "";
+  if (rs) {
+    resize = "resizable,";
+  }
+  popupWin = window.open(url, name, 'scrollbars,menubar,' + resize + 'width=' + w + ',height=' + h);
+}
+
+// recharge le générateur 
+function startOver() {
+  numQuestions = 1;
+  numChoices = 1;
+  quizType = "";
+  parent.cadre1.location.href = "qcm0_etendu.htm";
+  parent.cadre2.location.href = "vide.htm";
+  parent.cadre3.location.href = "vide.htm";
+}
+
+// -->
+</script>
+
+
+</head>
+
+
+<BODY id="bu" link=#0033ff vlink=#006600 alink=#cc0000 bgcolor=#ffffff>
+<center><DIV style="text-align:center;font-family:Arial;font-size:16pt;color=#ffffcc;background-color=#000000;width:300px;">Générateur de Quiz et QCM</DIV></center>
+<br>
+<font face="Verdana, Arial, Helvetica" size=-1><a href="javascript:startOver();">Réinitialiser la page</a></font>
+
+
+<!-- The Quiz creator was created by Charity Kahn, charity@cnet.com -->
+
+</body>
+</html>

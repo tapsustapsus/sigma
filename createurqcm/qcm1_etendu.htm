@@ -1,0 +1,41 @@
+<html>
+
+<head><title></title>
+
+<script language="JavaScript">
+
+/**************************************************
+Ce fichier demande à l'utilisateur combien il veut d'items par question (si il a choisi un QCM en bouton radio ou en menu déroulant), et charge cette valeur dans la variable numChoices qui est initialise dans le fichier du premier cadre, ad.htm.
+**************************************************/
+
+// active et sélectionne le premier élément du premier formulaire (nombre de choix)
+function setFocus() {
+  document.forms[0].elements[0].focus();
+  document.forms[0].elements[0].select();
+}
+
+//charge qcm2.htm
+function react(form) {
+  parent.intro.numChoices=form.numChoices.value;
+  parent.cadre2.location.href='qcm2_etendu.htm';
+} 
+
+// -->
+</script>
+
+</head>
+
+
+<body bgcolor="#ffffff" onLoad="setFocus()">
+<!-- demande combien d'items et le stocke dans numChoices; charge qcm2.htm -->
+<font face="Verdana, Arial, Helvetica" size=-1>
+<form>Combien d'items par question  ? 
+<input name="numChoices" type=text size=5 value="5">
+&nbsp;&nbsp;
+<input type=button value="Valider" onClick="react(this.form)">
+</form>
+
+<!-- The Quiz creator was created by Charity Kahn, charity@cnet.com -->
+
+</body>
+</html>

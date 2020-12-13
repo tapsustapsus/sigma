@@ -1,0 +1,32 @@
+html {
+    font-family: sans-serif;
+  }
+  
+  form {
+    width: 600px;
+    margin-left: 20px;
+  }
+  
+  div {
+    margin-bottom: 20px;
+  }
+  
+  .vraiclass {
+    color: rgb(48, 155, 6);
+    font-size: 100%;
+    font-style: normal;
+    
+  }
+  .fautclass {
+    color: rgb(240, 22, 40);
+    font-size: 100%;
+    font-style: normal;
+    text-decoration:line-through;
+  }
+  .quest {
+    color: rgb(26, 22, 240);
+    font-size: 100%;
+    font-style: normal;
+    font-weight: bold;
+  }
+ 

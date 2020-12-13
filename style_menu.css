@@ -1,0 +1,174 @@
+
+/*p{
+    background-color: rgb(241, 243, 215);
+    border:1px solid black;
+}*/
+.p2{
+    padding:20px;
+}
+.p3{
+    padding-left: 20;
+    padding-bottom: 20;
+}
+
+/*
+body{
+    font-family: 'source code pro',serif;
+    font-size: 13px;
+    margin:0px;
+    padding:0px;
+}*/
+nav{
+    width: 100%;
+    background-color: #424558;
+}
+
+nav > ul{
+    margin: 0px;
+    padding: 0px;
+}
+nav > ul::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+nav > ul> li{
+float: left;
+position: relative;
+}
+nav > ul > li > a{
+    padding:20px 30px ;
+    color: #FFF;
+}
+/* permet d'enlever le decalage causé par les elements 5*/
+nav > ul > li:hover a{
+    padding: 15px 30px 20px 30px;
+}
+/*.............*/
+
+nav li{
+    list-style-type: none;
+}
+
+.submenu{
+    display: none;
+}
+
+nav a{
+    display:inline-block;
+    text-decoration: none;
+}
+
+
+
+/* pour le sous menu */
+
+
+nav li:hover .submenu{
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    padding: 0px;
+    z-index: 1000;
+
+}
+.submenu li{
+    border-bottom: 1px solid #CCC;
+
+}
+
+.submenu li a{
+    padding: 15px 30px ;
+    font-size: 13px;
+    color: #222538;
+    width: 200px;
+}
+
+
+/*elements * ajoute couleur de fond */
+
+.menu-html:hover{
+    border-top: 5px solid #e44d26;
+    background-color: RGBa(228,77,38,0.15);
+}
+.menu-css:hover{
+    border-top: 5px solid #0070bb;
+    background-color: RGBa(000,112,192,0.15);
+}
+.menu-javascript:hover{
+    border-top: 5px solid #f1dc4f;
+    background-color: RGBa(241,211,79,0.15);
+}
+.menu-contact:hover{
+    border-top: 5px solid #888;
+    background-color: RGBa(220,220,220,0.15);
+}
+.menu-outils:hover{
+    border-top: 5px solid rgb(97, 219, 16);
+    background-color: RGBa(220,220,220,0.15);
+}
+
+/* ajoute couleur de fond aux elements de sous menu*/
+
+
+.menu-html .submenu{
+    background-color: cornflowerblue;
+}
+.menu-css .submenu{
+    background-color: rgb(237, 100, 100);
+}
+.menu-javascript .submenu{
+    background-color: rgb(25, 226, 166);
+}
+.menu-outils .submenu{
+    background-color: cornflowerblue;
+}
+/* style d'affichage des elements a du sous menu */
+.submenu li:hover a{
+    color: cornsilk;
+    font-weight: bold;
+}
+.menu-html .submenu li :hover{
+background-color: RGB(210,77,60);
+}
+.menu-css .submenu li :hover{
+    background-color: RGB(000,115,200);
+}
+.menu-javascript .submenu li :hover{
+    background-color: RGB(200,165,75);
+}
+.menu-outils .submenu li :hover{
+        background-color: RGB(210,77,60);
+}
+
+
+/* pour le sous menu 2 */
+
+    .submenu2{
+        display: none;
+        width: 400px;
+    }
+   
+
+/* pour le sous menu */
+
+
+nav ul li ul li:hover .submenu2{
+    display: inline-block;
+    position: relative;
+    padding-left: 20%;
+   }
+.submenu2 li{
+    border-bottom: 1px solid rgb(213, 235, 21);
+}
+
+.submenu li .submenu2 li a{
+    padding: 10px 30px ;
+    font-size: 13px;
+    color: #0e0105;
+    width: 200px;
+}
+
+

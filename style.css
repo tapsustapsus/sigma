@@ -1,0 +1,137 @@
+body{
+	background-color: #F3EEE3;
+	font-family:Verdana;
+}
+/* je suis un commentaire*/
+h5{
+	font-size: 20px;
+	color: blue;
+	font-style: italic;
+}
+h6{
+	font-size: 25px;
+	color: blue;
+	font-weight: bold;
+}
+h4,h3{
+	font-size: 15px;
+	color: rgb(12, 11, 11);
+	font-weight: bold;
+}
+/* type id avec un id qui ne peut etre utilisé q une seule fois */
+#taans1_58{
+	font-size: 15px;
+	color: blue;
+	font-weight: bold;
+}
+/* type class avec un id qui peut etre le meme pour beaucoup d'elements*/
+.p1{
+	font-size: 15px;
+	color: purple;
+	font-weight: bold;
+}
+.question{
+	font-size: 12px;
+	color: rgb(10, 10, 10);
+	font-weight: bold;
+		 }
+.question:hover{
+	font-size: 12px;
+	color: rgb(12, 8, 233);
+	font-weight: bold;
+		 }
+.corps_question{
+	font-size: 12px;
+	color: rgb(10, 10, 10);
+	font-weight: bold;
+	 }		 
+.corps{
+	font-size: 12px;
+	color: rgb(3, 1, 22);
+         }
+.menu_element{
+	font-size: 20px;
+	color: green;
+	font-weight: bold;
+	text-align: center;
+         }
+.reponse{
+	font-size: 15px;
+	color: green;
+	width:50%;
+	
+	text-align: left;
+	}
+.ombre{
+	font-size: 30px;
+	color: rgb(0, 2, 128);
+	font-weight: bold;
+	text-align: left;
+	text-shadow: 2px 2px 0 rgb(233, 193, 12),
+                 3px 3px 0 rgb(0, 0, 0);
+		}
+.paragraphe{
+	width:50%;
+	padding:10px;
+	font-size: 14px;
+	font-family:Verdana;
+	color: rgb(3, 1, 22);
+	border: 3px rgba(0, 0, 0, 0.856) solid;
+	box-shadow: 6px 6px 0px rgb(233, 172, 3);
+	 }		
+	 /*pour retour haut de page rapidemenet*/
+.retourHaut{
+	width:100px;
+	height:100px;
+	text-align:center;
+	background:whiteSmoke;
+	font-weight:bold;
+	color:#444;
+	text-decoration:none;
+	position:fixed;
+	top:80%;
+	right:80%;
+	display:none;
+	background:url('images/sirinebouguila.png')no-repeat 0px 0px;
+}	 
+    .retourHaut:hover{
+		text-decoration:none;
+	}
+
+	#GTitre
+	{
+		width:60%;
+		display:block;
+		height:40px;
+		text-align:center;
+		
+		 color: #153ceb;
+		 font-weight:bold;
+		 background: #444;
+		 background: linear-gradient( #555, #2C2C2C);
+		 text-shadow: 0px 1px 0px white;
+		 text-shadow: 0px 1px 0px rgba( 255, 255, 255, 0.4);
+		 box-shadow: 0 0 10px rgba( 0, 0, 0, 0.8),
+					 0 -1px 0 rgba( 255, 255, 255, 0.6);	
+		
+		padding-top:12px;
+		box-shadow: 6px 6px 0px #aaa;
+		color:#EDEEEE;
+	}
+ /*pour retour haut de page rapidemenet*/
+
+ #global{
+	 background-color: #c0c7c9;
+	 width:900px;
+ }
+
+ #partieG{
+	 width:250px;
+	 float:left;
+ }
+
+ #contenu{
+	 margin-left: 250px;
+	 padding-left: 20px;
+	 background-color: white;
+ }

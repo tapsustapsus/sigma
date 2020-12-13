@@ -1,0 +1,47 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
+    
+    <script>
+        function visibilite(thingId) {
+            var targetElement;
+            targetElement = document.getElementById(thingId);
+            if (targetElement.style.display == "none") {
+                targetElement.style.display = "";
+            } else {
+                targetElement.style.display = "none";
+            }
+        }
+    </script>
+    
+     <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+      
+    <!--**************************************************************************************************************-->
+    <hr>
+    <p>Question n° 1 : (Tunis 2004)</p>
+       <p class="question"><b>Le cœur bat en rythme sinusal dans les circonstances suivantes :</b></p>
+       <ul class="corps">
+           <li>A- Cœur isolé, perfusé, battant spontanément in vitro </li>
+           <li>B- Section de tous les nerfs arrivant au cœur </li>
+           <li>C- Destruction du nœud sinusal </li>
+           <li>D- Section totale du faisceau de His </li>
+           <li>E- Administration de β bloquants. </li>
+       </ul>
+    <br>
+       <p>Réponse……<textarea name="reponse" rows="1" cols="10"></textarea>..........</p>
+    
+    <!--*****afficher ou masquer la réponse************-->
+    <a href="javascript:visibilite('reponse1');">afficher/masquer la réponse</a>
+    
+    <div id="reponse1" style="display:none;">
+        La bonne réponse ABDE
+    </div>
+    
+    <!--**************************************************************************************************************-->
+    </body>
+    </html>

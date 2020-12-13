@@ -1,0 +1,50 @@
+<html>
+
+<head><title>Générateur de QCM</title>
+  <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+<script language="JavaScript">
+<!--
+/**************************************************
+Ce fichier demande à l'utilisateur combien il veut poser de questions, de quel type : (boutons radio, menus déroulants, ou zone de texte). Il charge ces valeurs dans les variables numQuestions et quizType, qui sont initialisées dans le fichier du premier cadre (frame), ad.htm.
+**************************************************/ 
+
+// active et sélectionne le premier élément du premier formulaire (nombre de questions)
+function setFocus() {
+  document.forms[0].elements[0].focus();
+  document.forms[0].elements[0].select();
+}
+
+//charge le fichier approprié
+function react(form) {
+  parent.intro.numQuestions = form.numQuestions.value;
+  var qt = form.quizType.options[form.quizType.selectedIndex].value
+  parent.intro.quizType = qt;
+  if (qt != "text") { //s'il ne s'agit pas de réponses "texte"
+    location.href='qcm1_etendu.htm';//on passe à qcm1.htm
+  } else { //sinon...
+    parent.cadre2.location.href='qcm2_etendu.htm';//on passe directement à qcm2.htm
+  }
+} 
+
+// -->
+</script>
+
+</head>
+
+
+<body bgcolor="#ffffff" onLoad="setFocus()">
+
+<!-- demande le nombre de questions et le stocke dans numQuestions; charge le fichier approprié -->
+<font face="Verdana, Arial, Helvetica" size=-1><form>Combien de questions dans le QCM ? <input name="numQuestions" type=text size=5 value="1"><br>
+Sélectionnez un type d'affichage : <select name="quizType">
+<option value="radio">boutons radio
+<option value="select">menus déroulants
+<option value="checkbox">cases à cocher
+<option value="text">zone de texte
+</select>
+&nbsp;&nbsp;<input type=button value="Valider" onClick="react(this.form)"></form>
+
+<!-- The Quiz creator was created by Charity Kahn, charity@cnet.com -->
+
+</body>
+</html>

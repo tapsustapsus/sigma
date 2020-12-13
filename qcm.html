@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link  rel="stylesheet"  type="text/css" href="style_menu.css" >
+        <link rel="stylesheet"   type="text/css" href="style.css">
+        <script type="text/javascript" src="afficheresultat.js"></script>
+        
+        <title>
+            Page qcm idividuelle
+        </title>
+        <meta CHARSET="utf-8">
+        <script>
+            function test(nom,n){
+                var rep=true;
+                for(i=0; i<n; i++){
+                    if(nom[i].value==1 && nom[i].checked==false) rep=false;
+                    if(nom[i].value==0 && nom[i].checked==true) rep=false;
+                }
+                return rep;
+
+                
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <p> la question est qu'est ce tu preferes?</p>
+        <div class="juste">
+            <input type="checkbox" name="choix" value="1">A/ glace vanille</input>
+        </div>
+         <div>
+            <input  type="checkbox" name="choix" value="1">B/ chantilly</input>
+         </div>
+         <div class="juste">
+            <input type="checkbox" name="choix" value="0">C/ chocolat cahud</input>
+         </div>
+            
+         <div style="color:rgb(226, 19, 81);">
+            <input  type="checkbox" name="choix" value="0">D/ biscuit</input>
+         </div>
+           
+        </form>
+<!--*****afficher ou masquer la réponse************-->
+<a href="javascript:visibilite('reponse2');">afficher/masquer la réponse</a>
+
+<div id="reponse2" style="display:none;">
+    La bonne réponse  est A C
+</div>
+
+<script type="text/javascript" src="changercouleur.js"></script>
+
+
+    </body>
+</html>

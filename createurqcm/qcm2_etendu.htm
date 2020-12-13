@@ -1,0 +1,386 @@
+<html>
+<head>
+<title>Générateur de QCM</title>
+<meta CHARSET ="utf-8">
+<script language = "JavaScript">
+<!--
+
+/**********************************************
+Ce fichier questionne l'utilisateur sur les items du menu, les URL, où sont chargés les documents, et quel événement déclenche le chargement, et écrit le code approprié vers le cadre trois
+**********************************************/
+
+
+// active le premier élément du premier formulaire si c'est une zone d'entrée texte 
+function setFocus() {
+  document.forms[0].elements[0].focus();
+}
+
+
+// reprend les valeurs des variables numQuestions, quizType, et numChoices du cadre n°1
+var numQuestions = parent.intro.numQuestions;
+var quizType = parent.intro.quizType;
+var numChoices = parent.intro.numChoices;
+
+// initialise curQuestion à 1
+var curQuestion = 1;
+
+// crée un pseudo pour le cadre n°3
+var t = parent.cadre3;
+
+
+/* construit le début de la page html à charger dans le cadre n°3; le code apparaîtra entre deux balises pre*/
+function beginCode() {
+  t.document.write("<html><head><title>code window</title></head><body bgcolor='#ffffff'><pre>");
+}
+
+
+/* construit le début du code */
+function buildTop() {
+  t.document.writeln('&lt;html&gt;&lt;head&gt;&lt;title&gt;&lt;/title&gt;');
+  t.document.writeln('&lt;meta CHARSET="utf-8"&gt;');
+  t.document.writeln('&lt;script type="text/javascript" src="verifier_qcm_couleur.js"&gt;&lt;/script&gt;');
+
+  t.document.writeln('&lt;script language="JavaScript"&gt;\r\n&lt;!--\r\n');
+}
+
+var reponse="" //pour concaténer les réponses des cases à cocher
+
+/* construit le code pour créer les tableaux de réponses */
+/***********************************************************/
+/***********************************************************/
+/***********************************************************/
+function buildAnswersArray()
+{
+  t.document.writeln('var numQues = ' + numQuestions + ';');
+      if (quizType=="checkbox")
+      {
+        t.document.writeln('var numChoi = ' + numChoices + ';');
+      }
+       
+  t.document.write('\r\n');
+
+  t.document.writeln('var answers = new Array(' + numQuestions + ');');
+  t.document.writeln('var answers_true = new Array(' + numQuestions + ');');
+ 
+          for (i=0; i<numQuestions; i++)
+          {
+	          reponse="";//initialisation
+             for (j=0; j<numChoices; j++)
+              {
+                currChoice = document.forms[i].elements[2*(j+1)];
+                  if (currChoice.checked)
+                  { 
+  		               reponse+=document.forms[i].elements[2*j+1].value+",&nbsp;";   
+                  }
+              }
+	            t.document.writeln('answers[' + i + '] = "' + reponse+ '";');
+	            t.document.writeln('answers_true[' + i + '] = "' + document.forms[i].elements[2*numChoices+1].value + '";');
+	       
+          }
+  
+  t.document.write('\r\n');
+}
+
+/*    ************** */
+/* construit le code pour la fonction getScore(), qui teste les réponses correctes, calcule le score en pourcentage, et resort les resultats dans une zone de texte */
+/***********************************************************/
+
+/* construit le milieu du code */ 
+
+/***********************************************************/
+function buildMiddle() {
+  t.document.writeln('// --&gt;');
+  t.document.writeln('&lt;/script&gt;\r\n&lt;/head&gt;\r\n');
+  t.document.writeln('&lt;body bgcolor="FFFFEC"&gt;\r\n');
+}
+
+/* construit le code pour le corps <body> de la page */
+
+/***********************************************************/
+
+function entierAleatoire()
+  {
+   return Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+  }
+
+function buildBodyCode() 
+{
+   var currChoice;
+   t.document.write('&lt;!---------------a copier-------------------&gt;');
+   t.document.write('\r\n');
+      t.document.writeln('&lt;form name="quiz"&gt;');
+      for (i=1; i<=numQuestions; i++) 
+        {
+          t.document.writeln('&lt;b&gt;'+i + '. ' + document.forms[i-1].elements[0].value + '&lt;/b&gt;&lt;br&gt;');
+          t.document.writeln('&lt;div &gt;&lt;br&gt;');
+
+
+          var nombrealeatoire= entierAleatoire();
+
+          t.document.writeln('&lt;div id='+nombrealeatoire+'&gt;');
+
+             for (j=0; j<numChoices; j++)
+               {
+                x=j+1;
+                // currChoice = document.forms[i-1].elements[2*j+1].value;
+                currChoice = document.forms[i-1].elements[2*j+1].value;
+                //currChoice1= document.forms[i-1].elements[2*j+2].checked;
+                         
+                 //*************************************************************************************
+                             
+                 if (document.forms[i-1].elements[2*j+2].checked==true) 
+
+//*****************************************************************************************************************************
+                 {
+                
+                  t.document.writeln('&lt;div class="juste" id="pr'+x+'"&gt;&lt;input type="checkbox" name="q' + i + '" value="' + currChoice + '"&gt;' + currChoice + '&lt;/div &gt; &lt;br&gt;');
+                 }
+                 else
+                {
+                  t.document.writeln('&lt;div id="pr'+x+'"&gt;&lt;input type="checkbox" name="q' + i + '" value="' + currChoice + '"&gt;' + currChoice + '&lt;/div &gt; &lt;br&gt;');
+                }      
+                   
+               }
+          }
+          t.document.writeln('&lt;/div&gt;\r\n');
+          t.document.writeln('&lt;p&gt;\r\n');
+
+  /* ******************************************** */
+
+  t.document.writeln('&lt;input type="button" value="Correction" onClick="fond('+nombrealeatoire+')"&gt;\r\n&lt;input type="reset" value="RAZ"&gt;\r\n');
+  t.document.writeln('&lt;/p&gt;\r\n');
+  
+  if (document.output.showAnswers.checked == true) 
+    {
+      t.document.writeln('Commentaires :&lt;br&gt;');
+      t.document.writeln('&lt;div id="com" &gt;&lt;/div&gt;');
+    }
+
+  t.document.writeln('&lt;/form&gt;');
+  t.document.write('\r\n');
+  t.document.write('&lt;!---------------a copier-------------------&gt;');
+  t.document.write('\r\n');
+}
+
+/* construit la fin du code */
+function buildEnd() {
+  t.document.writeln('&lt;/body&gt;&lt;/html&gt;');
+}
+
+
+/* construit la fin de la page */
+function endCode() {
+  t.document.write("</pre></body></html>");
+  t.document.close();
+}
+
+
+/* cette fonction appelle  toutes les étapes qui construisent individuellement le code qui apparaît dans le cadre n°3*/
+function buildCode() {
+  beginCode();
+  buildTop();
+  buildAnswersArray();
+ 
+  buildMiddle();
+  buildBodyCode();
+  buildEnd();
+  endCode();
+}
+
+/*Cette fonction lance ?????le QCM ???????une fois généré*/
+function testCode()
+ {
+    test=window.open("patience.htm","","width=520,height=480,top=10,scrollbars=yes,resizable=yes");
+    test.document.write("<html><head><title>QCM</title>");
+    test.document.writeln('<script language="JavaScript">');
+    var reponse="" 
+    test.document.writeln('var numQues = ' + numQuestions + ';');
+      
+    
+        test.document.writeln('var numChoi = ' + numChoices + ';');
+     
+        test.document.writeln('var answers = new Array(' + numQuestions + ');');
+        test.document.writeln('var answers_true = new Array(' + numQuestions + ');');
+      
+         
+          for (i=0; i<numQuestions; i++) 
+            {
+               reponse="";
+               for (j=0; j<numChoices; j++)
+                 {
+                    currChoice = document.forms[i].elements[2*(j+1)];
+                   if (currChoice.checked)
+                     {
+                      
+                       reponse+=document.forms[i].elements[2*j+1].value+", ";
+                       
+                     }
+                  }
+               test.document.writeln('answers[' + i + '] = "' + reponse+ '";');
+               test.document.writeln('answers_true[' + i + '] = "' + document.forms[i].elements[2*numChoices+1].value + '";');
+             
+             }
+      
+      test.document.writeln('function getScore(form) {');
+      test.document.writeln('  var score = 0;');
+     
+
+
+      if (quizType == "checkbox") 
+      {
+        test.document.writeln('  for (i=0; i<numQues; i++) {');
+        test.document.writeln('    currElt = i*(numChoi+1);');
+  
+        test.document.writeln('    for (j=0; j<numChoi; j++) {');
+        test.document.writeln('      currSelection = form.elements[currElt + j+1];');
+        test.document.writeln('      if ((currSelection.checked)&&(answers[i].indexOf(currSelection.value) != -1)) {');
+      test.document.writeln('        bon=true;}');
+      test.document.writeln('      if ((currSelection.checked)&&(answers[i].indexOf(currSelection.value) == -1)) {');
+      test.document.writeln('        bon=false;');
+      test.document.writeln('        break;');
+      test.document.writeln('        }');
+      test.document.writeln('      if (!(currSelection.checked)&&(answers[i].indexOf(currSelection.value) != -1)) {');
+      test.document.writeln('        bon=false;');
+      test.document.writeln('        break;');
+      test.document.writeln('        }');
+        test.document.writeln('    }');
+      test.document.writeln('    if (bon==true) {');
+      test.document.writeln('          score++');
+      test.document.writeln('          form.elements[currElt].value=answers_true[i];');
+      test.document.writeln('    }');
+      test.document.writeln('    else {')
+      test.document.writeln('          form.elements[currElt].value=answers_false[i];');
+      test.document.writeln('    }');
+        test.document.writeln('  }');
+      } 
+      
+
+
+      if (document.output.showAnswers.checked == true)
+      {
+        test.document.writeln('  var correctAnswers = "";');
+        test.document.writeln('  for (i=1; i<=numQues; i++) {');
+        test.document.writeln('    correctAnswers += i + ". " + answers[i-1] + "\\r\\n";');
+        test.document.writeln('  }');
+        test.document.writeln('  form.solutions.value = correctAnswers;');
+      }
+      test.document.writeln('}');
+      test.document.writeln('</script></head><body bgcolor="FFFFEC">');//debut du body
+      var currChoice;
+      
+      test.document.writeln('<form name="quiz">');
+      for (i=1; i<=numQuestions; i++) 
+      {
+        test.document.writeln('<b>'+i + '. ' + document.forms[i-1].elements[0].value + '</b><br>'); 
+   
+          for (j=0; j<numChoices; j++)
+          x=j+1;
+          {
+            currChoice = document.forms[i-1].elements[2*j+1].value;
+                 
+                   t.document.writeln('&lt;div id="pr'+x+'"&gt;&lt;input type="checkbox" name="q' + i + '" value="' + currChoice + '"&gt;' + currChoice + '&lt;/div &gt; &lt;br&gt;');        
+          }
+    
+        test.document.writeln('<p>');
+      }
+
+      test.document.writeln('<input type="button" value="Score" onClick="getScore(this.form)"><input type="reset" value="RAZ"><p>');
+    
+        test.document.writeln('Réponses correctes :<br>')
+        test.document.writeln('<textarea name="commentaires" wrap="virtual" rows="4" cols="40"></textarea>');
+     
+      test.document.writeln('</form>');  
+      
+    test.document.write("</body></html>");
+
+}
+
+//-->
+</script>
+</head>
+
+<body bgcolor="#ffffff" onLoad="setFocus()">
+
+<!--**************************************************************************************-->
+
+<script language="JavaScript">
+
+    /* boucle toutes les questions et construit les champs d'entrée pour les questions, les items, et la réponse correcte pour chacune */
+
+    for (i=1; i<=numQuestions; i++)
+    {
+     
+      document.write('<form name="quizQues' + i + '">');
+      document.write('<table border=0 cellpadding=5 cellspacing=0>');
+      //couleur du cadre haut
+      document.write('<tr bgcolor="#ff9966" colspan=2><td align=right valign=top><font face="Verdana, Arial, Helvetica" size=-1><strong>Question ' + i + ':</strong></font></td>');
+      
+      document.write('<td colspan=3><font face="Verdana, Arial, Helvetica" size=-1><textarea name="q' + i + '" rows=2 cols=40 wrap="virtual"></textarea></font></td></tr>');
+      // construit la table des champs d'entrée, en alternant la couleur de fond
+      var bg = "#ffffcc";
+      
+        document.write('<tr bgcolor="#ffcc66"><td>&nbsp;</td><td><font face="Verdana, Arial, Helvetica" size=-2>Choisissez, dans l\'ordre d\'apparition :</font></td><td><font face="Verdana, Arial, Helvetica" size=-2>Cochez la bonne réponse :</font></td></tr>');
+        
+        for (j=1; j<=numChoices; j++) 
+          {//couleur du cadre bas
+            document.write('<tr bgcolor="#ffffcc"><td align=right><font face="Verdana, Arial, Helvetica" size=-1>');
+            (quizType == "text") ? document.write('réponse(s) ') : document.write('Choix ' + j);
+              document.write(':</font></td>');
+             document.write('<td><input type=text name="q' + i + 'c' + j + '" size=30 value=""></td><td>&nbsp;');
+
+              if (quizType == "checkbox") 
+                {//case à cocher
+                document.write('<input type=checkbox name="a' + i + '" size=30 value=""');
+                  document.write('>');
+                }
+            document.write('</td>');
+            document.write('</tr>');
+
+            if (i%2 == 0)
+              {
+                bg = "'#ffffcc'";
+              }
+            else
+              {
+                bg = "'#eeeeee'";
+              }
+          }
+        document.write('<tr bgcolor="#ffcc66"><td>&nbsp;</td><td><font face="Verdana, Arial, Helvetica" size=-2>Commentaires si réponse bonne :</font></td><td></td></tr>');
+        document.write('<tr bgcolor="#ffffcc" colspan=2><td >&nbsp;</td><td colspan=3><font face="Verdana, Arial, Helvetica" size=-1><textarea name="cb' + i + '" rows=2 cols=40 wrap="virtual"></textarea></font></td></tr>');
+
+        document.write('</table>');
+        document.write('</form>');
+        
+      }
+
+      // -->
+</script>
+
+
+<form name="output">
+
+<table border=0 cellpadding=5 cellspacing=0>
+<tr>
+<!-- crée le bouton sur lequel cliquer pour voir le code dans le cadre n°3 -->
+<td>
+<font face="Verdana, Arial, Helvetica">
+<input type="checkbox" name="showAnswers" checked>
+<font size=-2>Voir les bonnes réponses dans une zone de texte<br>
+quand l'utilisateur clique sur Valider</font>
+</td>
+<!-- crée le bouton sur lequel cliquer pour tester le code dans une fenêtre -->
+<td>
+<font face="Verdana, Arial, Helvetica" size=-1>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size=-1><input type=button name="submit" value="Voir le code ci-dessous" onClick="buildCode()">
+</font>
+</td>
+<td><input type=button name="test" value="Tester le code ci-dessous" onClick="testCode()"></td>
+</tr>
+</table>
+
+</form>
+
+<!-- The Quiz creator was created by Charity Kahn, charity@cnet.com -->
+
+</body>
+</html>
